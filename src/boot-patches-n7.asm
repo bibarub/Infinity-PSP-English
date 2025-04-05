@@ -3,10 +3,10 @@
 
 .open "BOOT.BIN.patched", 0x08803F60
 
-; NOP the call to sceImposeSetLanguageMode to avoid overriding language settings
+; Do not call sceImposeSetLanguageMode to avoid overriding language settings
 .orga 0x761C
 .area 4
-	nop
+        addu v0, zero, zero
 .endarea
 
 ; Decrease line spacing in fullscreen text.

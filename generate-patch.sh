@@ -1,9 +1,9 @@
 #!/bin/sh
 
 [ -z "$GAME" ] && export GAME=e17
-REPACKED_ISO=./iso/${GAME}-repacked.iso
 [ -z "$TL_SUFFIX" ] && export TL_SUFFIX=en
-PATCH_FILE=./patch/${GAME}-$TL_SUFFIX.xdelta
+REPACKED_ISO=./iso/${GAME}-${TL_SUFFIX}.iso
+PATCH_FILE=./patch/${GAME}-${TL_SUFFIX}.xdelta
 if [ "$GAME" = "r11" ]; then
 	ORIGINAL_ISO=./iso/Remember11-jap.iso
 elif [ "$GAME" = "n7" ]; then

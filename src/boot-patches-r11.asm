@@ -3,20 +3,10 @@
 
 .open "BOOT.BIN.patched", 0x08803F60
 
-.orga 0x761c
+; Do not call sceImposeSetLanguageMode to avoid overriding language settings
+.orga 0x7620
 .area 4
-	; Home menu language:
-	; 0 - ja
-	; 1 - eng
-	; 8 - ru
-	li a0, 1
-.endarea
-
-.orga 0x7624
-.area 4
-	; Home button layout
-	; 0 - O=OK; 1 - X=OK
-	li a1, 0
+        addu v0, zero, zero
 .endarea
 
 ; Decrease line spacing in fullscreen text.

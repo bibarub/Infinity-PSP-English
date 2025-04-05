@@ -3,10 +3,10 @@
 
 .open "BOOT.BIN.patched", 0x08803F60
 
-; NOP the call to sceImposeSetLanguageMode to avoid overriding language settings
+; Do not call sceImposeSetLanguageMode to avoid overriding language settings
 .orga 0x761C
 .area 4
-	nop
+	addu v0, zero, zero
 .endarea
 
 ; Decrease line spacing in fullscreen text.
@@ -66,7 +66,7 @@ HACK_00:
 	nop
 .endarea
 ; Clear the relocation entry for the jump at 0x0881A990 (4th instruction in the original subroutine)
-; Can be worked around, but it's safer this way.  
+; Can be worked around, but it's safer this way.
 .orga 0x14EF6C
 	.word 0x0
 

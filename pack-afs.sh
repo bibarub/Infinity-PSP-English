@@ -9,11 +9,14 @@ COMPRESS=./bin/compressbip
 REPACK_AFS=./bin/repack_afs
 REPACK_SCENE=text/repack_scene.py
 ARMIPS=./tools/armips
+SIGN_NP=./tools/sign_np # placeholder
 PY=python3
 if [ "$(uname)" = "Darwin" ]; then
 	ARMIPS=./tools/armips_osx
+	SIGN_NP=./tools/sign_np_osx # placeholder
 elif [ "$(uname)" = "Linux" ]; then
 	ARMIPS=./tools/armips_lin64
+	SIGN_NP=./tools/sign_np_lin64
 fi
 
 # change this for other translations
@@ -125,9 +128,11 @@ patch_boot_bin () {
 
 	rm -f $ISO_BIN_DIR/BOOT.BIN
 	rm -f $ISO_BIN_DIR/EBOOT.BIN
-	cp -f $WORKDIR/BOOT.BIN.${TL_SUFFIX} ./$ISO_BIN_DIR/BOOT.BIN
-	# I think EBOOT is supposed to be encrypted, but it works fine without it on emulators and on a real psp
-	cp -f ./$ISO_BIN_DIR/BOOT.BIN ./$ISO_BIN_DIR/EBOOT.BIN
+	cp -f $WORKDIR/BOOT.BIN.${TL_SUFFIX} $ISO_BIN_DIR/BOOT.BIN
+	cp $ISO_BIN_DIR/BOOT.BIN $ISO_BIN_DIR/EBOOT.BIN
+	if command -v $SIGN_NP >/dev/null 2>&1; then
+		$SIGN_NP -elf $ISO_BIN_DIR/BOOT.BIN $ISO_BIN_DIR/EBOOT.BIN 1
+	fi
 }
 
 repack_e17_se_afs () {

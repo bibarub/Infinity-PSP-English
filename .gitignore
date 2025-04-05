@@ -23,6 +23,8 @@
 
 /patch/*.xdelta
 
+/pbp/*.PBP
+
 /*.exe
 /*.dll
 /*.DUMP
